@@ -22,17 +22,18 @@ namespace Les_2
                 }
             }
 
-            string output = "";
-            for (int i = 0; i < array.Length; i++)
-            {
-                output += array[i] + " ";
-            }
-            return output;
+            //string output = "";
+            //for (int i = 0; i < array.Length; i++)
+            //{
+            //    output += array[i] + " ";
+            //}
+            //return output;
+            return string.Join(" ", array);
         }
 
         public string Selection(int[] array)
         {
-            for (int i = 0; i < array.Length - 1; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 int minIndex = i;
                 for (int j = i + 1; j < array.Length; j++)
@@ -48,12 +49,13 @@ namespace Les_2
                 array[minIndex] = temp;
             }
 
-            string output = "";
-            for (int i = 0; i < array.Length; i++)
-            {
-                output += array[i] + " ";
-            }
-            return output;
+            //string output = "";
+            //for (int i = 0; i < array.Length; i++)
+            //{
+            //    output += array[i] + " ";
+            //}
+            //return output;
+            return string.Join(" ", array);
         }
 
     }
