@@ -6,18 +6,23 @@
         {
             Sorting sorting = new Sorting();
 
-            int[] arrayBubble = { -1, -9, -3, 5, 8, 1, 4 };
+            int[] arrayBubble = Array.ConvertAll(File.ReadAllLines("numbers.txt"), int.Parse);
             Console.WriteLine($"Bubble sort: {sorting.Bubble(arrayBubble)}");
 
             Console.WriteLine("\n----------------\n");
 
-            int[] arraySelection = { -1, -9, -3, 5, 8, 1, 4 };
+            int[] arraySelection = Array.ConvertAll(File.ReadAllLines("numbers.txt"), int.Parse);
             Console.WriteLine($"Selection sort: {sorting.Selection(arraySelection)}");
 
             Console.WriteLine("\n----------------\n");
 
-            int[] arrayInsertion = { -1, -9, -3, 5, 8, 1, 4 };
+            int[] arrayInsertion = Array.ConvertAll(File.ReadAllLines("numbers.txt"), int.Parse);
             Console.WriteLine($"Insertion sort: {sorting.Insertion(arrayInsertion)}");
+
+            Console.WriteLine("\n----------------\n");
+
+            int[] arrayIsSorted = Array.ConvertAll(File.ReadAllLines("numbers.txt"), int.Parse);
+            Console.WriteLine($"Is sorted?: {sorting.isSorted(arrayIsSorted)}");
         }
     }
 }

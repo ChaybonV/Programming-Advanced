@@ -10,6 +10,7 @@ namespace Les_2
         {
             for (int i = 0; i < array.Length; i++)
             {
+                bool flag = false;
                 for (int j = 0; j < array.Length - i - 1; j++)
                 {
                     if (array[j] > array[j + 1])
@@ -18,7 +19,13 @@ namespace Les_2
                         int temp = array[j];
                         array[j] = array[j + 1];
                         array[j + 1] = temp;
+                        flag = true;
                     }
+                }
+
+                if (flag == false)
+                {
+                    break;
                 }
             }
 
@@ -62,17 +69,17 @@ namespace Les_2
         {
             for (int i = 1; i < array.Length; i++)
             {
-                int key = array[i];
+                int number = array[i];
                 int j = i - 1;
 
                 // Moving every element that is bigger then the key one step to right
-                while (j >= 0 && array[j] > key)
+                while (j >= 0 && array[j] > number)
                 {
                     array[j + 1] = array[j];
                     j--;
                 }
 
-                array[j + 1] = key;
+                array[j + 1] = number;
             }
 
             //string output = "";
@@ -84,6 +91,27 @@ namespace Les_2
             return string.Join(" ", array);
         }
 
+
+
+
+        // ------------------------
+        //Extra oefeningen op pruning >>>>>>>>>
+
+        //Check of Array Gesorteerd Is
+        public bool isSorted(int[] array)
+        {
+            for(int i = 0;i < array.Length; i++)
+            {
+                if(array[i] > array[i + 1])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        //Vind het eerste duplicaat in een array
+        //Zoek het eerste positieve getal in een array
 
     }
 }
