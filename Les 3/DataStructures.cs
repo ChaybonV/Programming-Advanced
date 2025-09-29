@@ -29,7 +29,7 @@ namespace Les_3
 
         public class LinkedList
         {
-            private Node head;
+            private Node head { get; set; }
 
             public LinkedList()
             {
