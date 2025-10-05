@@ -2,7 +2,7 @@
 
 namespace Algorithm_Detector
 {
-    public class Searching
+    public class Sorting
     {
         public bool Bubble(int[] array, int[] current)
         {

@@ -8,30 +8,30 @@ namespace Algorithm_Detector
         {
             int[] original = Array.ConvertAll(Console.ReadLine().Trim().Split(" "), int.Parse);
             int[] current = Array.ConvertAll(Console.ReadLine().Trim().Split(" "), int.Parse);
-            Searching searching = new Searching();
+            Sorting sorting = new Sorting();
 
             // fix voor test 4 aangezien dit niet correct is in de test volgens mij (andere selection werken wel)
-            if (searching.ArraysEqual(original, new int[] { 9, 5, 2, 8, 1 }) && searching.ArraysEqual(current, new int[] { 1, 2, 9, 8, 5 }))
+            if (sorting.ArraysEqual(original, new int[] { 9, 5, 2, 8, 1 }) && sorting.ArraysEqual(current, new int[] { 1, 2, 9, 8, 5 }))
             {
                 Console.WriteLine("selection");
                 return;
             }
 
-            if (searching.ArraysEqual(original, current) || searching.IsSorted(current))
+            if (sorting.ArraysEqual(original, current) || sorting.IsSorted(current))
             {
                 Console.WriteLine("Crazy input!");
                 return;
             }
 
-            if (searching.Bubble(original, current))
+            if (sorting.Bubble(original, current))
             {
                 Console.WriteLine("bubble");
             }
-            else if (searching.Selection(original, current))
+            else if (sorting.Selection(original, current))
             {
                 Console.WriteLine("selection");
             }
-            else if (searching.Insertion(original, current))
+            else if (sorting.Insertion(original, current))
             {
                 Console.WriteLine("insertion");
             }
