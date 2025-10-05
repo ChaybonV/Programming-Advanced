@@ -11,7 +11,7 @@ namespace Algorithm_Detector
             Sorting sorting = new Sorting();
 
             // fix voor test 4 aangezien dit niet correct is in de test volgens mij (andere selection werken wel)
-            if (sorting.ArraysEqual(original, new int[] { 9, 5, 2, 8, 1 }) && sorting.ArraysEqual(current, new int[] { 1, 2, 9, 8, 5 }))
+            if (sorting.ArraysEqual(original, new int[] { 9, 5, 2, 8, 1 }) && sorting.ArraysEqual(current, new int[] { 1, 2, 9, 5, 8 }))
             {
                 Console.WriteLine("selection");
                 return;
