@@ -60,5 +60,75 @@ namespace Les_4
 
             return "No file found.";
         }
+
+        public int Factorial(int n)
+        {
+            if (n <= 2)
+            {
+                return n;
+            }
+
+            int result = 1;
+            for(int i = 2; i <= n; i++)
+            {
+                result *= i;
+            }
+
+            return result;
+        }
+
+        public int FactorialRec(int n)
+        {
+            if (n <= 1)
+            {
+                return 1;
+            }
+
+            return n * FactorialRec(n - 1);
+        }
+
+
+
+        // EXTRA EXERCISES RECURSION
+
+        // 1.
+        public int SumOfNaturalNumbers(int n)
+        {
+            if (n <= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return n + SumOfNaturalNumbers(n - 1);
+            }
+        }
+
+        // 2.
+        public int CountDigits(int n)
+        {
+            if (n <= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1 + CountDigits(n / 10);
+            }
+        }
+
+        // 3.
+        public string ReverseString(string str)
+        {
+            if (str.Length <= 1)
+            {
+                return str;
+            }
+            else
+            {
+                return ReverseString(str.Substring(1)) + str[0];
+            }  
+        }
+
     }
 }
