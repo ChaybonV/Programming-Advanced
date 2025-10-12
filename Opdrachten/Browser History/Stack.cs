@@ -5,7 +5,7 @@ namespace Browser_History
 {
     public class Stack
     {
-        private List<string> items;
+        public List<string> items;
 
         public Stack()
         {
