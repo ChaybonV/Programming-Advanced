@@ -5,94 +5,152 @@ namespace Cipher
 {
     public class CipherMethods
     {
-        // Vowel count (recursive)
-        public int CountVowels(string s, int index)
+        public int CountVowels(string s, int index = 0)
         {
-            if (index >= s.Length) return 0;
+            if (index >= s.Length)
+            {
+                return 0;
+            }
+
             char c = char.ToLower(s[index]);
-            int current = "aeiou".Contains(c) ? 1 : 0;
+            int current = 0;
+
+            if ("aeiou".Contains(c))
+            {
+                current = 1;
+            }
+
             return current + CountVowels(s, index + 1);
         }
 
-        // Digit product (recursive) met basecase 1 als geen digits
-        public int ProductOfDigits(string s, int index, bool hasDigit)
+        public int ProductOfDigits(string s, bool hasDigit = false, int index = 0)
         {
             if (index >= s.Length)
-                return hasDigit ? 1 : 1; // basecase → 1, ook als er geen cijfers zijn
-
-            if (char.IsDigit(s[index]))
             {
-                int digit = s[index] - '0';
-                return digit * ProductOfDigits(s, index + 1, true);
+                return 1;
             }
 
-            return ProductOfDigits(s, index + 1, hasDigit);
-        }
-
-        // Uppercase letters (recursive)
-        public string GetUppercase(string s, int index)
-        {
-            if (index >= s.Length) return "";
             char c = s[index];
-            return (char.IsUpper(c) ? c.ToString() : "") + GetUppercase(s, index + 1);
+
+            if (char.IsDigit(c))
+            {
+                int digit = c - '0';
+                return digit * ProductOfDigits(s, true, index + 1);
+            }
+            else
+            {
+                return ProductOfDigits(s, hasDigit, index + 1);
+            }
         }
 
-        // ASCII sum (recursive)
-        public int SumASCII(string s, int index)
+        public string GetUppercase(string s, int index = 0)
         {
-            if (index >= s.Length) return 0;
+            if (index >= s.Length)
+            {
+                return "";
+            }
+
+            char c = s[index];
+            string result = "";
+
+            if (char.IsUpper(c))
+            {
+                result = c.ToString();
+            }
+
+            return result + GetUppercase(s, index + 1);
+        }
+
+        public int SumASCII(string s, int index = 0)
+        {
+            if (index >= s.Length)
+            {
+                return 0;
+            }
+
             return (int)s[index] + SumASCII(s, index + 1);
         }
 
-        // Unique letters (recursive)
-        public int CountUniqueLetters(string s, int index, List<char> unique)
-        {
-            if (index >= s.Length) return unique.Count;
-            char c = s[index];
-            if (char.IsLetter(c) && !unique.Contains(c))
-                unique.Add(c);
-            return CountUniqueLetters(s, index + 1, unique);
-        }
-
-        // Second largest digit (volledig recursive)
-        public int GetSecondLargestDigit(string s)
-        {
-            return GetSecondLargestDigitRec(s, 0, -1, -1);
-        }
-
-        private int GetSecondLargestDigitRec(string s, int index, int first, int second)
+        public int CountUniqueLetters(string s, List<char> unique, int index = 0)
         {
             if (index >= s.Length)
-                return second == -1 ? 0 : second;
-
-            if (char.IsDigit(s[index]))
             {
-                int val = s[index] - '0';
+                return unique.Count;
+            }
+
+            char c = s[index];
+
+            if (char.IsLetter(c) && !unique.Contains(c))
+            {
+                unique.Add(c);
+            }
+
+            return CountUniqueLetters(s, unique, index + 1);
+        }
+
+        public int GetSecondLargestDigit(string s, int index = 0, int first = -1, int second = -1)
+        {
+            if (index >= s.Length)
+            {
+                if (second == -1)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return second;
+                }
+            }
+
+            char c = s[index];
+
+            if (char.IsDigit(c))
+            {
+                int val = c - '0';
+
                 if (val > first)
                 {
                     second = first;
                     first = val;
                 }
-                else if (val > second && val != first)
+                else
                 {
-                    second = val;
+                    if (val > second && val != first)
+                    {
+                        second = val;
+                    }
                 }
             }
 
-            return GetSecondLargestDigitRec(s, index + 1, first, second);
+            return GetSecondLargestDigit(s, index + 1, first, second);
         }
 
-        // Palindrome check (recursive, letters/digits only, case-insensitive)
-        public bool IsPalindrome(string s, int left, int right)
+        public bool IsPalindrome(string s, int right, int left = 0)
         {
-            if (left >= right) return true;
+            if (left >= right)
+            {
+                return true;
+            }
 
-            if (!char.IsLetterOrDigit(s[left])) return IsPalindrome(s, left + 1, right);
-            if (!char.IsLetterOrDigit(s[right])) return IsPalindrome(s, left, right - 1);
+            if (!char.IsLetterOrDigit(s[left]))
+            {
+                return IsPalindrome(s, right, left + 1);
+            }
 
-            if (char.ToLower(s[left]) != char.ToLower(s[right])) return false;
+            if (!char.IsLetterOrDigit(s[right]))
+            {
+                return IsPalindrome(s, right - 1, left);
+            }
 
-            return IsPalindrome(s, left + 1, right - 1);
+            char leftChar = char.ToLower(s[left]);
+            char rightChar = char.ToLower(s[right]);
+
+            if (leftChar != rightChar)
+            {
+                return false;
+            }
+
+            return IsPalindrome(s, right - 1, left + 1);
         }
     }
 }
