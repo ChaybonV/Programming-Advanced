@@ -20,14 +20,15 @@ namespace Snake_Word_Search
 
             foreach (string word in words)
             {
+                if (string.IsNullOrWhiteSpace(word))
+                    continue;
+
                 bool[,] visited = new bool[size, size];
 
-                if (grid[startRow, startCol] == word[0])
+                if (grid[startRow, startCol] == word[0] &&
+                    SearchWord(word, 0, startRow, startCol, visited))
                 {
-                    if (SearchWord(word, 0, startRow, startCol, visited))
-                    {
-                        foundWords.Add(word);
-                    }
+                    foundWords.Add(word);
                 }
             }
 
@@ -40,11 +41,11 @@ namespace Snake_Word_Search
             if (index == word.Length)
                 return true;
 
-            // Geldige positie?
+            // Ongeldige positie
             if (row < 0 || row >= size || col < 0 || col >= size)
                 return false;
 
-            // Klopt de letter en nog niet bezocht?
+            // Letter klopt niet of al bezocht
             if (visited[row, col] || grid[row, col] != word[index])
                 return false;
 
@@ -52,21 +53,26 @@ namespace Snake_Word_Search
             visited[row, col] = true;
 
             // Richtingen: omhoog, omlaag, links, rechts
-            int[] dRow = { -1, 1, 0, 0 };
-            int[] dCol = { 0, 0, -1, 1 };
-
-            // Probeer in elke richting
-            for (int i = 0; i < 4; i++)
+            if (SearchWord(word, index + 1, row - 1, col, visited))
             {
-                int newRow = row + dRow[i];
-                int newCol = col + dCol[i];
-
-                if (SearchWord(word, index + 1, newRow, newCol, visited))
-                    return true;
+                return true;
+            }
+            if (SearchWord(word, index + 1, row + 1, col, visited))
+            {
+                return true;
+            }
+            if (SearchWord(word, index + 1, row, col - 1, visited))
+            {
+                return true;
+            }
+            if (SearchWord(word, index + 1, row, col + 1, visited))
+            {
+                return true;
             }
 
-            // Backtrack: markeer weer als niet bezocht
+            // Backtrack
             visited[row, col] = false;
+
             return false;
         }
     }
