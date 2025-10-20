@@ -7,11 +7,12 @@ namespace Les_6
     {
         static void Main(string[] args)
         {
-            List<int> list = new List<int> { 12, 56, 34, 78, 23, 89, 45, 67, 90, 21 };
+            List<int> list = new List<int> { 12, 56, 34, 78, 12, 23, 89, 45, 67, 90, 21 };
 
             QuickSort qs = new QuickSort();
             list = qs.Sort(list);
             qs.Print(list);
+            Console.WriteLine("\nBig O: "+qs.Counter);
         }
     }
 }

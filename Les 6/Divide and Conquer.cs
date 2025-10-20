@@ -5,6 +5,7 @@ namespace Les_6
 {
     class QuickSort
     {
+        public int Counter = 0;  // For Big O tracking
         public List<int> Sort(List<int> list)
         {
             // Basecase: list with 1 or 0 elements is sorted
@@ -20,15 +21,27 @@ namespace Les_6
             // Split list in 'less' and 'greater'
             for (int i = 1; i < list.Count; i++)
             {
+                Counter++;
                 if (list[i] < pivot)
                 {
+                    // duplicate check
+                    //if (!less.Contains(list[i]))
+                    //{
+                    //    less.Add(list[i]);
+                    //}
                     less.Add(list[i]);
                 }
                 else
                 {
+                    // duplicate check
+                    //if (!greater.Contains(list[i]))
+                    //{
+                    //    greater.Add(list[i]);
+                    //}
                     greater.Add(list[i]);
                 }
             }
+
 
             // Recursive sorting and merging
             List<int> result = new List<int>();
@@ -45,7 +58,6 @@ namespace Les_6
             {
                 Console.Write(list[i] + " ");
             }
-            Console.WriteLine();
         }
     }
 
