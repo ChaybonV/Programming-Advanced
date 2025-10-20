@@ -24,7 +24,7 @@ namespace Les_6
                 Counter++;
                 if (list[i] < pivot)
                 {
-                    // duplicate check
+                    // You can do this check for removing duplicates
                     //if (!less.Contains(list[i]))
                     //{
                     //    less.Add(list[i]);
@@ -33,7 +33,7 @@ namespace Les_6
                 }
                 else
                 {
-                    // duplicate check
+                    // You can do this check for removing duplicates
                     //if (!greater.Contains(list[i]))
                     //{
                     //    greater.Add(list[i]);
@@ -41,7 +41,6 @@ namespace Les_6
                     greater.Add(list[i]);
                 }
             }
-
 
             // Recursive sorting and merging
             List<int> result = new List<int>();
