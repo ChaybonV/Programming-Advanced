@@ -2,48 +2,9 @@
 
 namespace MagicBridge
 {
-    class TreasureHunter
+    public class Program
     {
-        private int n;
-        private int k;
-        private int[] planks;
-
-        public TreasureHunter(int n, int k, int[] planks) // geen constructor indien mogelijk
-        {
-            this.n = n;
-            this.k = k;
-            this.planks = planks;
-        }
-
-        public long FindMaxEnergy()
-        {
-            long[] dp = new long[n]; // duidelijkere benaming dan dp
-            dp[0] = planks[0];
-
-            for (int i = 1; i < n; i++)
-            {
-                dp[i] = long.MinValue;
-                for (int j = Math.Max(0, i - k); j < i; j++)
-                {
-                    if (dp[j] != long.MinValue)
-                    {
-                        dp[i] = Math.Max(dp[i], dp[j] + planks[i]);
-                    }
-                }
-
-                if (i <= k)
-                {
-                    dp[i] = Math.Max(dp[i], planks[i]);
-                }
-            }
-
-            return dp[n - 1];
-        }
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string firstLine = Console.ReadLine();
             if (string.IsNullOrEmpty(firstLine))
@@ -52,7 +13,7 @@ namespace MagicBridge
                 return;
             }
 
-            string[] firstParts = firstLine.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); // geen trim en geen split op new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries
+            string[] firstParts = firstLine.Trim().Split(" ");
             if (firstParts.Length != 2)
             {
                 Console.WriteLine("Crazy input!");
@@ -74,7 +35,7 @@ namespace MagicBridge
                 return;
             }
 
-            string[] secondParts = secondLine.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); // geen trim en geen split op new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries
+            string[] secondParts = secondLine.Trim().Split(" ");
             if (secondParts.Length != n)
             {
                 Console.WriteLine("Crazy input!");
@@ -91,8 +52,8 @@ namespace MagicBridge
                 }
             }
 
-            TreasureHunter hunter = new TreasureHunter(n, k, planks);
-            Console.WriteLine(hunter.FindMaxEnergy());
+            TreasureHunter hunter = new TreasureHunter();
+            Console.WriteLine(hunter.FindMaxEnergy(n, k, planks));
         }
     }
 }
