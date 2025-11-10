@@ -7,7 +7,7 @@ namespace Trial_exam_1
         public static void Main(string[] args)
         {
             string input = Console.ReadLine();
-            var words = input.Split(' ');
+            var words = input.Split(" ");
 
             Console.WriteLine("=== Strategie 1: Sorteren van karakters ===");
             var grouper1 = new AnagramGrouper1();
@@ -29,7 +29,7 @@ namespace Trial_exam_1
         }
     }
 
-    // Strategie 1: Sorteren van karakters (zonder Linq)
+    // Strategie 1: Sorteren van karakters
     class AnagramGrouper1
     {
         public List<List<string>> GroupAnagrams(string[] words)
@@ -38,11 +38,13 @@ namespace Trial_exam_1
             foreach (var word in words)
             {
                 char[] chars = word.ToCharArray();
-                Array.Sort(chars); // handmatige sortering van karakters
+                Array.Sort(chars);
                 string key = new string(chars);
 
                 if (!dict.ContainsKey(key))
+                {
                     dict[key] = new List<string>();
+                } 
                 dict[key].Add(word);
             }
             return new List<List<string>>(dict.Values);
@@ -56,7 +58,9 @@ namespace Trial_exam_1
         {
             int[] count = new int[26];
             foreach (char c in word)
+            {
                 count[c - 'a']++;
+            }
             return string.Join("#", count);
         }
 
@@ -67,7 +71,9 @@ namespace Trial_exam_1
             {
                 string key = GetKey(word);
                 if (!dict.ContainsKey(key))
+                {
                     dict[key] = new List<string>();
+                }
                 dict[key].Add(word);
             }
             return new List<List<string>>(dict.Values);
@@ -88,7 +94,9 @@ namespace Trial_exam_1
             for (int i = 0; i < minLen; i++)
             {
                 if (a[i] != b[i])
+                {
                     return a[i] - b[i];
+                }
             }
             return a.Length - b.Length;
         }
@@ -113,7 +121,9 @@ namespace Trial_exam_1
                 }
             }
             if (currentGroup.Count > 0)
+            {
                 result.Add(currentGroup);
+            }
 
             return result;
         }
