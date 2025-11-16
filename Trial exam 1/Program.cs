@@ -1,4 +1,6 @@
-﻿using System;
+// GLOBAL OPTIONS BUT NOT USING VAR IN C#
+
+using System;
 
 namespace Trial_exam_1
 {
