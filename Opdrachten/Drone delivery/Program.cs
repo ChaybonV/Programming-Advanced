@@ -7,63 +7,96 @@ namespace Drone_delivery
     {
         public static void Main(string[] args)
         {
-            int maxBattery = 0;
-            string first = Console.ReadLine();
+            int maxBattery = ReadIntOrFail();
+            List<string> rechargeCities = ReadRechargeCities();
+            int cityCount = ReadIntOrFail();
+            int roadCount = ReadIntOrFail();
 
-            if (!int.TryParse(first, out maxBattery))
+            Dictionary<string, List<Edge>> graph = ReadGraph(roadCount);
+            if (!graph.ContainsKey("S") || !graph.ContainsKey("T"))
             {
                 Console.WriteLine("Crazy input!");
                 return;
             }
 
-            string rechargeLine = Console.ReadLine();
-            if (rechargeLine == null)
+            Dictionary<string, int> dist;
+            Dictionary<string, string> prev;
+            if (!CalculateShortestPath(graph, rechargeCities, maxBattery, out dist, out prev))
             {
                 Console.WriteLine("Crazy input!");
                 return;
             }
 
-            List<string> rechargeCities = new List<string>();
-            if (rechargeLine.Trim() != "-")
+            List<string> path = ReconstructPath(prev, "T");
+
+            for (int i = 0; i < path.Count; i++)
             {
-                foreach (string c in rechargeLine.Split(" "))
+                Console.Write(path[i]);
+                if (i < path.Count - 1)
+                {
+                    Console.Write(" --> ");
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine(dist["T"]);
+        }
+
+        public static int ReadIntOrFail()
+        {
+            string input = Console.ReadLine();
+            int value = 0;
+            if (!int.TryParse(input, out value))
+            {
+                Console.WriteLine("Crazy input!");
+                Environment.Exit(0);
+            }
+
+            return value;
+        }
+
+        public static List<string> ReadRechargeCities()
+        {
+            string line = Console.ReadLine();
+            if (line == null)
+            {
+                Console.WriteLine("Crazy input!");
+                Environment.Exit(0);
+            }
+
+            List<string> list = new List<string>();
+            if (line.Trim() != "-")
+            {
+                foreach (string c in line.Split(" "))
                 {
                     if (c.Trim() != "")
                     {
-                        rechargeCities.Add(c.Trim());
+                        list.Add(c.Trim());
                     }
                 }
             }
 
-            int cityCount = 0;
-            if (!int.TryParse(Console.ReadLine(), out cityCount))
-            {
-                Console.WriteLine("Crazy input!");
-                return;
-            }
+            return list;
+        }
 
-            int roadCount = 0;
-            if (!int.TryParse(Console.ReadLine(), out roadCount))
-            {
-                Console.WriteLine("Crazy input!");
-                return;
-            }
-
+        public static Dictionary<string, List<Edge>> ReadGraph(int roadCount)
+        {
             Dictionary<string, List<Edge>> graph = new Dictionary<string, List<Edge>>();
+
             for (int i = 0; i < roadCount; i++)
             {
                 string line = Console.ReadLine();
                 if (line == null)
                 {
                     Console.WriteLine("Crazy input!");
-                    return;
+                    Environment.Exit(0);
                 }
 
                 string[] parts = line.Split(" ");
                 if (parts.Length != 3)
                 {
                     Console.WriteLine("Crazy input!");
-                    return;
+                    Environment.Exit(0);
                 }
 
                 string a = parts[0];
@@ -73,13 +106,14 @@ namespace Drone_delivery
                 if (!int.TryParse(parts[2], out cost))
                 {
                     Console.WriteLine("Crazy input!");
-                    return;
+                    Environment.Exit(0);
                 }
 
                 if (!graph.ContainsKey(a))
                 {
                     graph[a] = new List<Edge>();
                 }
+
                 if (!graph.ContainsKey(b))
                 {
                     graph[b] = new List<Edge>();
@@ -89,16 +123,15 @@ namespace Drone_delivery
                 graph[b].Add(new Edge(a, cost));
             }
 
-            if (!graph.ContainsKey("S") || !graph.ContainsKey("T"))
-            {
-                Console.WriteLine("Crazy input!");
-                return;
-            }
+            return graph;
+        }
 
-            Dictionary<string, int> dist = new Dictionary<string, int>();
+        public static bool CalculateShortestPath(Dictionary<string, List<Edge>> graph,List<string> rechargeCities,int maxBattery,out Dictionary<string, int> dist,out Dictionary<string, string> prev)
+        {
+            dist = new Dictionary<string, int>();
+            prev = new Dictionary<string, string>();
             Dictionary<string, int> batteryLeft = new Dictionary<string, int>();
             Dictionary<string, bool> visited = new Dictionary<string, bool>();
-            Dictionary<string, string> prev = new Dictionary<string, string>();
 
             foreach (string city in graph.Keys)
             {
@@ -156,33 +189,21 @@ namespace Drone_delivery
                 }
             }
 
-            if (dist["T"] == int.MaxValue)
-            {
-                Console.WriteLine("Crazy input!");
-                return;
-            }
+            return dist["T"] != int.MaxValue;
+        }
 
+        public static List<string> ReconstructPath(Dictionary<string, string> prev, string end)
+        {
             List<string> path = new List<string>();
-            string curNode = "T";
-            while (curNode != null)
+            string cur = end;
+            while (cur != null)
             {
-                path.Add(curNode);
-                curNode = prev[curNode];
+                path.Add(cur);
+                cur = prev[cur];
             }
 
             path.Reverse();
-
-            for (int i = 0; i < path.Count; i++)
-            {
-                Console.Write(path[i]);
-                if (i < path.Count - 1)
-                {
-                    Console.Write(" --> ");
-                }
-            }
-
-            Console.WriteLine();
-            Console.WriteLine(dist["T"]);
+            return path;
         }
     }
 }
