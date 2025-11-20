@@ -49,7 +49,7 @@ namespace Drone_delivery
             if (!int.TryParse(input, out value))
             {
                 Console.WriteLine("Crazy input!");
-                Environment.Exit(0);
+                return;
             }
 
             return value;
@@ -61,7 +61,7 @@ namespace Drone_delivery
             if (line == null)
             {
                 Console.WriteLine("Crazy input!");
-                Environment.Exit(0);
+                return;
             }
 
             List<string> list = new List<string>();
@@ -89,14 +89,14 @@ namespace Drone_delivery
                 if (line == null)
                 {
                     Console.WriteLine("Crazy input!");
-                    Environment.Exit(0);
+                    return;
                 }
 
                 string[] parts = line.Split(" ");
                 if (parts.Length != 3)
                 {
                     Console.WriteLine("Crazy input!");
-                    Environment.Exit(0);
+                    return;
                 }
 
                 string a = parts[0];
@@ -106,7 +106,7 @@ namespace Drone_delivery
                 if (!int.TryParse(parts[2], out cost))
                 {
                     Console.WriteLine("Crazy input!");
-                    Environment.Exit(0);
+                    return;
                 }
 
                 if (!graph.ContainsKey(a))
