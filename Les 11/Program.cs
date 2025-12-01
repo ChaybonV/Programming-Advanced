@@ -1,4 +1,6 @@
-﻿namespace Les_11
+﻿using System;
+
+namespace Les_11
 {
     public class Program
     {
