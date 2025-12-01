@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace Les_11
 {
@@ -8,6 +8,23 @@ namespace Les_11
         public TreeNode Root { get; set; }
         private Queue<TreeNode> queue = new Queue<TreeNode>();
 
+        public class TreeNode
+        {
+            public int Value;
+            public TreeNode Left;
+            public TreeNode Right;
+
+            public TreeNode(int value)
+            {
+                Value = value;
+            }
+
+            public override string ToString()
+            {
+                return Value.ToString();
+            }
+        }
+
         public ExerciseGreedyFails(int[] nodes)
         {
             Root = null;
@@ -15,7 +32,6 @@ namespace Les_11
             {
                 this.Insert(value);
             }
-
         }
 
         private void Insert(int value)
@@ -43,7 +59,6 @@ namespace Les_11
                     node.Right = new TreeNode(value);
                     queue.Enqueue(node.Right);
                 }
-
             }
         }
 
@@ -51,6 +66,7 @@ namespace Les_11
         {
             InOrder(Root);
         }
+
         private void InOrder(TreeNode node)
         {
             if (node == null) return;
@@ -64,6 +80,7 @@ namespace Les_11
         {
             PreOrder(Root);
         }
+
         private void PreOrder(TreeNode node)
         {
             if (node == null) return;
@@ -75,26 +92,56 @@ namespace Les_11
 
         public int GreedySum()
         {
+            if (Root == null) return 0;
+
             TreeNode node = Root;
             int som = 0;
+
             while (node != null)
             {
                 som += node.Value;
-                if (node.Left.Value > node.Right.Value)
+
+                if (node.Left == null && node.Right == null)
+                {
+                    break;
+                }
+                else if (node.Left == null)
+                {
+                    node = node.Right;
+                }
+                else if (node.Right == null)
                 {
                     node = node.Left;
                 }
-                else node = node.Right;
+                else
+                {
+                    node = (node.Left.Value > node.Right.Value)
+                        ? node.Left
+                        : node.Right;
+                }
             }
-            return 0;
+
+            return som;
         }
 
         public int Sum()
         {
-            return 0;
+            return MaxPathSum(Root);
+        }
+
+        private int MaxPathSum(TreeNode node)
+        {
+            if (node == null) return int.MinValue;
+
+            if (node.Left == null && node.Right == null)
+            {
+                return node.Value;
+            }
+
+            int leftSum = MaxPathSum(node.Left);
+            int rightSum = MaxPathSum(node.Right);
+
+            return node.Value + Math.Max(leftSum, rightSum);
         }
     }
 }
-
-
-// NOG NIET AF

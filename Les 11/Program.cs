@@ -39,6 +39,28 @@ namespace Les_11
                 totalCoins += kvp.Value;
             }
             Console.WriteLine($"Total coins used: {totalCoins}");
+
+
+
+            // === Extra exercise ===
+            Console.WriteLine();
+            int[] waarden = { 5, 9, 1, 2, 1, 8, 7 };
+
+            ExerciseGreedyFails tree = new ExerciseGreedyFails(waarden);
+
+            Console.WriteLine("\nPreOrder traversal:");
+            tree.PreOrder();
+
+            Console.WriteLine("\n\nInOrder traversal:");
+            tree.InOrder();
+
+            Console.WriteLine("\n\nGreedy som:");
+            int greedySum = tree.GreedySum();
+            Console.WriteLine(greedySum);
+
+            Console.WriteLine("\nOptimale som:");
+            int optimaal = tree.Sum();
+            Console.WriteLine(optimaal);
         }
     }
 }
