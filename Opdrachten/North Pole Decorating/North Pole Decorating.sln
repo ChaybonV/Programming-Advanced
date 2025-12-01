@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "North Pole Decorating", "North Pole Decorating.csproj", "{25190A05-2B6D-4575-BD92-B1F0D69D3A8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25190A05-2B6D-4575-BD92-B1F0D69D3A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25190A05-2B6D-4575-BD92-B1F0D69D3A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25190A05-2B6D-4575-BD92-B1F0D69D3A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25190A05-2B6D-4575-BD92-B1F0D69D3A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A37A395-14C8-4AB3-ABCB-4B1735E7089D}
+	EndGlobalSection
+EndGlobal
