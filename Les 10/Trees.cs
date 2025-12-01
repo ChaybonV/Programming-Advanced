@@ -17,7 +17,6 @@ namespace Les_10
         }
     }
 
-
     public class BinaryTree
     {
         public TreeNode Root { get; private set; }
@@ -57,7 +56,6 @@ namespace Les_10
             }
         }
 
-
         public void PrintInOrder(TreeNode node)
         {
             if (node == null)
@@ -94,8 +92,59 @@ namespace Les_10
             Console.Write(node.Value + " ");
         }
 
+        public int Min()
+        {
+            if (Root == null)
+            {
+                Console.WriteLine("Tree is empty");
+                return 0;
+            }
 
+            TreeNode current = Root;
+            while (current.Left != null)
+            {
+                current = current.Left;
+            }
+            return current.Value;
+        }
 
+        public int Max()
+        {
+            if (Root == null)
+            {
+                Console.WriteLine("Tree is empty");
+                return 0;
+            }
+
+            TreeNode current = Root;
+            while (current.Right != null)
+            {
+                current = current.Right;
+            }
+            return current.Value;
+        }
+
+        public bool Search(int value)
+        {
+            TreeNode current = Root;
+
+            while (current != null)
+            {
+                if (value == current.Value)
+                {
+                    return true;
+                }
+                else if (value < current.Value)
+                {
+                    current = current.Left;
+                }
+                else
+                {
+                    current = current.Right;
+                }
+            }
+
+            return false;
+        }
     }
 }
-
